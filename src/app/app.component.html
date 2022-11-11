@@ -1,0 +1,35 @@
+<div class="wrapper container pt-3">
+  <h4>
+    <p class="header inline-block mr-3">Covid-19 Trends Tracker</p>
+  </h4>
+  <div class="row pl-2 pr-2">
+    <app-covidsummary class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 mb-4" *ngFor="let summary of covidSummary"
+      [summary]="summary">
+    </app-covidsummary>
+  </div>
+  <div class="row box-shadow mt-1 ml-0 mr-0 pt-4 bg-white">
+    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-12">
+      <form>
+        <fieldset>
+          <div class="form-group">
+            <!-- <i class="fa fa-search country-search inline-block" aria-hidden="true"></i> -->
+            <input type="text" (keyup)="filterCoutryList($event)" class="form-control border pl-5 smallFont bgLightgray" placeholder="Search Country">
+            <ul class="listGroup mt-3">
+              <li class="list-group__item d-flex pr-2" (click)="updateCountry(country)"
+                *ngFor="let country of udpatedCountryList; trackBy: trackByCountryFn">
+                <span class="pl-2 smallFont text-gray">
+                  {{ country }}
+                </span>
+              </li>
+            </ul>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+    <div class="col-xl-9 col-lg-9 col-md-8 col-sm-6 col-xs-12">
+      <div *ngIf="selectedCountry">
+        <app-countrychart [selectedCountry]='selectedCountry'></app-countrychart>
+      </div>
+    </div>
+  </div>
+</div>

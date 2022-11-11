@@ -1,0 +1,8 @@
+<label class="countryName box-shadow">{{selectedCountry}}</label>
+
+<div class="inline-block">
+    <div class="loading" *ngIf="isLoading">
+        <img src="../../../assets/loading.gif" />
+    </div>
+    <div id="covid-country-chart"></div>
+</div>
