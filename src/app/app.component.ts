@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { map, share, Subject, takeUntil } from 'rxjs';
+import { catchError, map, share, Subject, takeUntil } from 'rxjs';
 import { TITLES, URLS } from './enums/urls.enum';
 import { ChartHelperService } from './service/chart-helper.service';
 import { HelperService } from './utility/helper.service';
@@ -56,7 +56,8 @@ export class AppComponent implements OnInit {
     this.httpClient.get(URLS.GET_COUNTRIES)
       .pipe(
         takeUntil(this.$destroyed),
-        share()
+        share(),
+        catchError(this.helperService.handleError('getCountries'))
       )
       .subscribe((data: any) => {
         this.countries = [...data.response]
@@ -69,7 +70,8 @@ export class AppComponent implements OnInit {
       .pipe(
         takeUntil(this.$destroyed),
         share(),
-        map((data: any) => data.response)
+        map((data: any) => data.response),
+        catchError(this.helperService.handleError('getCountryCovidData'))
       )
       .subscribe((data: any) => {
         let final: any = this.transformCovidSummary(data);

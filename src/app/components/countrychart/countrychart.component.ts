@@ -1,8 +1,9 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ChartHelperService } from 'src/app/service/chart-helper.service';
 import { ChartService } from 'src/app/service/chart.service';
 import { HttpClient } from '@angular/common/http';
-import { share, Subject, takeUntil } from 'rxjs';
+import { catchError, Observable, of, share, Subject, takeUntil } from 'rxjs';
+import { HelperService } from 'src/app/utility/helper.service';
 
 @Component({
   selector: 'app-countrychart',
@@ -19,6 +20,7 @@ export class CountrychartComponent implements OnInit, OnChanges {
   constructor(
     private httpClient: HttpClient,
     private chartService: ChartService,
+    private helperService: HelperService,
     private chartHelperService: ChartHelperService) {
     this.highChart = this.chartService.initChart();
   }
@@ -41,7 +43,8 @@ export class CountrychartComponent implements OnInit, OnChanges {
     this.httpClient.get(`https://covid-193.p.rapidapi.com/history?country=${this.selectedCountry}`)
       .pipe(
         takeUntil(this.$destroyed),
-        share())
+        share(),
+        catchError(this.helperService.handleError('getCountryCovidData')))
       .subscribe((data: any) => {
         this.countryCovidData = data.response;
         chartOptions.series = this.chartHelperService.generateChartSeries(this.countryCovidData);

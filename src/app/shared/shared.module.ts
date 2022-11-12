@@ -6,7 +6,6 @@ import { ChartService } from '../service/chart.service';
   declarations: [],
   providers: [ChartService],
   imports: [
-    CommonModule
   ]
 })
 export class SharedModule { }

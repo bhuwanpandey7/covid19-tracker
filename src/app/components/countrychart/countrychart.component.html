@@ -1,4 +1,4 @@
-<label class="countryName box-shadow">{{selectedCountry}}</label>
+<label *ngIf="countryCovidData" class="countryName box-shadow">{{selectedCountry}}</label>
 
 <div class="inline-block">
     <div class="loading" *ngIf="isLoading">
