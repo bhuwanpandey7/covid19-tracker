@@ -1,27 +1,37 @@
 # CovidTracker
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.3.
+ ** Developer: Bhuwan Pandey **
+# Github [https://github.com/bhuwanpandey7]
+# Portfolio [https://bhuwancodes.netlify.app/] 
+# Linkedin [https://www.linkedin.com/in/bhuwan-pandey/]
+# Email [bpandey007@duck.com]
 
-## Development server
+# Getting Started with Covid Tracker Tool
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+AHOY - Covid Tracker Tool [https://bhuwancodes-covid-tracker.netlify.app/]
 
-## Code scaffolding
+## About Tool - What it does
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Tool to track covid trends accross globe.
+Search/Filter By - Country.
 
-## Build
+# Repo [https://github.com/bhuwanpandey7/covid19-tracker]
+# Branch : [https://github.com/bhuwanpandey7/covid19-tracker/tree/main]
+# Clone using [https://github.com/bhuwanpandey7/covid19-tracker.git]
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+# Run `npm install` to install all dependencies
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Available Scripts
 
-## Running end-to-end tests
+### `npm start`
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Runs the app in the development mode. [http://localhost:3000]
 
-## Further help
+### `npm run build`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Builds the app for production to the `build` folder.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
