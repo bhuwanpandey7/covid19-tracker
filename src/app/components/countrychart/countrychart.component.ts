@@ -14,6 +14,7 @@ export class CountrychartComponent implements OnInit, OnChanges {
   isLoading: boolean = false;
   countryCovidData: any;
   $destroyed: Subject<boolean> = new Subject<boolean>();
+  covidChart: any;
 
   constructor(
     private httpClient: HttpClient,
@@ -33,6 +34,9 @@ export class CountrychartComponent implements OnInit, OnChanges {
 
   generateChart() {
     const chartOptions = this.chartHelperService.ChartOptions;
+    if (this.covidChart) {
+      this.covidChart.destroy();
+    }
     this.isLoading = true;
     this.httpClient.get(`https://covid-193.p.rapidapi.com/history?country=${this.selectedCountry}`)
       .pipe(
@@ -41,7 +45,7 @@ export class CountrychartComponent implements OnInit, OnChanges {
       .subscribe((data: any) => {
         this.countryCovidData = data.response;
         chartOptions.series = this.chartHelperService.generateChartSeries(this.countryCovidData);
-        this.highChart.chart('covid-country-chart', chartOptions);
+        this.covidChart = this.highChart.chart('covid-country-chart', chartOptions);
         this.isLoading = false;
         console.log(data.response);
       })

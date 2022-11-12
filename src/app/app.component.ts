@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { map, share, Subject, takeUntil } from 'rxjs';
 import { TITLES, URLS } from './enums/urls.enum';
+import { ChartHelperService } from './service/chart-helper.service';
 import { HelperService } from './utility/helper.service';
 
 @Component({
@@ -15,7 +16,9 @@ export class AppComponent implements OnInit {
   selectedCountry: string = 'USA';
   udpatedCountryList: string[] = [];
 
-  constructor(private httpClient: HttpClient, private helperService: HelperService) { }
+  constructor(private httpClient: HttpClient,
+    private helperService: HelperService,
+    private chartHelperService: ChartHelperService) { }
 
   countries: Array<string> = [];
   covidSummary: any = [];
@@ -28,7 +31,8 @@ export class AppComponent implements OnInit {
     return index;
   }
 
-  updateCountry(country: string) {
+  updateCountry(country: string, event: any) {
+    event.preventDefault();
     this.selectedCountry = country;
   }
 
@@ -98,21 +102,7 @@ export class AppComponent implements OnInit {
   }
 
   private transformCovidSummary(data: any) {
-    let final: any = {
-      total: 0,
-      active: 0,
-      recovered: 0,
-      deaths: 0
-    };
-
-    for (let i = 0; i < data.length; i++) { // complexity O(n)
-      const elem = data[i];
-      final.total += elem.cases.total;
-      final.active += elem.cases.active;
-      final.recovered += elem.cases.recovered;
-      final.deaths += elem.deaths.total;
-    }
-    return final;
+    return this.chartHelperService.gnerateCovidSummaryDetails(data);
   }
 
   ngOnDestroy() {

@@ -21,6 +21,25 @@ export class ChartHelperService {
     }]
   }
 
+  gnerateCovidSummaryDetails(data: any) {
+    let final: any = {
+      total: 0,
+      active: 0,
+      recovered: 0,
+      deaths: 0
+    };
+
+    for (let i = 0; i < data.length; i++) { // complexity O(n)
+      const elem = data[i];
+      final.total += elem.cases.total;
+      final.active += elem.cases.active;
+      final.recovered += elem.cases.recovered;
+      final.deaths += elem.deaths.total;
+    }
+
+    return final;
+  }
+
   getData(countryCovidData: any) {
     const data = countryCovidData;
     const active = data.reduce((acc: any, curr: any) => acc + curr.cases.active, 0);
